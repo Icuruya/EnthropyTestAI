@@ -4,65 +4,313 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Enthropy - Soluciones de Automatización e IA</title>
+    
+    <!-- Tailwind CSS para un diseño moderno y responsivo -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts para una tipografía más limpia -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
     <style>
-        body { font-family: sans-serif; line-height: 1.6; margin: 0; padding: 0; background-color: #f4f4f4; color: #333; }
-        .container { max-width: 900px; margin: 20px auto; padding: 20px; background-color: #fff; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        h1, h2 { color: #2c3e50; }
-        h1 { text-align: center; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
-        .service-section { margin-bottom: 20px; }
-        .service-section h2 { border-left: 4px solid #3498db; padding-left: 10px; }
-        ul { list-style-type: disc; padding-left: 20px; }
+        /* Estilos personalizados para la página y el chatbot */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Un gris muy claro de Tailwind (slate-50) */
+        }
+
+        h1, h2 {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* --- Estilos del Chatbot --- */
+        
+        /* Contenedor principal del chat, inicialmente oculto */
+        #chat-window {
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            transform: translateY(20px);
+            opacity: 0;
+            display: none; /* Se gestiona con JS */
+        }
+
+        /* Clase para mostrar la ventana del chat con animación */
+        #chat-window.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Burbuja flotante del chat */
+        #chat-bubble {
+            transition: transform 0.2s ease-in-out;
+        }
+        #chat-bubble:hover {
+            transform: scale(1.1);
+        }
+
+        /* Barra de scroll en el cuerpo del chat */
+        #chat-body::-webkit-scrollbar {
+            width: 6px;
+        }
+        #chat-body::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        #chat-body::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 6px;
+        }
+        #chat-body::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
     </style>
 </head>
-<body>
-    <div class="container">
-        [cite_start]<h1>Catálogo de Servicios de Enthropy [cite: 1]</h1>
+<body class="text-slate-700">
 
-        <div class="service-section">
-            [cite_start]<h2>Automatización de Flujos de Trabajo [cite: 5]</h2>
-            <ul>
-                [cite_start]<li>Diseño y orquestación de workflows con herramientas no-code/low-code. [cite: 7]</li>
-                [cite_start]<li>Robotic Process Automation (RPA) para tareas repetitivas. [cite: 8]</li>
-                [cite_start]<li>Automatización de aprobaciones y firmas digitales. [cite: 9]</li>
-            </ul>
+    <!-- Contenedor Principal de la Página -->
+    <div class="container mx-auto px-4 py-12 max-w-5xl">
+        
+        <!-- Encabezado -->
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-slate-800">Catálogo de Servicios de Enthropy</h1>
+            <p class="mt-4 text-lg text-slate-600">Soluciones inteligentes para potenciar tu negocio.</p>
+        </header>
+
+        <!-- Grid de Servicios con diseño de tarjetas -->
+        <main class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <!-- Tarjeta de Servicio: Automatización -->
+            <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <div class="flex items-center justify-center h-12 w-12 rounded-full bg-sky-100 mb-4">
+                    <!-- Icono SVG -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-sky-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                </div>
+                <h2 class="text-xl font-bold text-slate-800 mb-2">Automatización de Flujos</h2>
+                <ul class="space-y-2 text-slate-600 list-disc list-inside">
+                    <li>Workflows no-code/low-code</li>
+                    <li>Robotic Process Automation (RPA)</li>
+                    <li>Aprobaciones y firmas digitales</li>
+                </ul>
+            </div>
+
+            <!-- Tarjeta de Servicio: Chatbots -->
+            <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <div class="flex items-center justify-center h-12 w-12 rounded-full bg-teal-100 mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
+                </div>
+                <h2 class="text-xl font-bold text-slate-800 mb-2">Agentes Conversacionales</h2>
+                <ul class="space-y-2 text-slate-600 list-disc list-inside">
+                    <li>Chatbots web y móvil 24/7</li>
+                    <li>Integración con WhatsApp y Teams</li>
+                    <li>Automatización de call-centers</li>
+                </ul>
+            </div>
+
+            <!-- Tarjeta de Servicio: IA y LLMs -->
+            <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <div class="flex items-center justify-center h-12 w-12 rounded-full bg-indigo-100 mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                </div>
+                <h2 class="text-xl font-bold text-slate-800 mb-2">IA y Large Language Models</h2>
+                <ul class="space-y-2 text-slate-600 list-disc list-inside">
+                    <li>Calificación de leads y clientes</li>
+                    <li>Generación automática de informes</li>
+                    <li>Análisis de texto y sentimiento</li>
+                </ul>
+            </div>
+
+            <!-- Tarjeta de Servicio: CRM y ERP -->
+            <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <div class="flex items-center justify-center h-12 w-12 rounded-full bg-rose-100 mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-rose-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                </div>
+                <h2 class="text-xl font-bold text-slate-800 mb-2">Gestión de CRM y ERP</h2>
+                <ul class="space-y-2 text-slate-600 list-disc list-inside">
+                    <li>Implementación de CRMs</li>
+                    <li>Integración ERP y CRM</li>
+                    <li>Lead-nurturing y scoring</li>
+                </ul>
+            </div>
+
+            <!-- Tarjeta de Servicio: Desarrollo -->
+            <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <div class="flex items-center justify-center h-12 w-12 rounded-full bg-amber-100 mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
+                </div>
+                <h2 class="text-xl font-bold text-slate-800 mb-2">Desarrollo y SaaS</h2>
+                <ul class="space-y-2 text-slate-600 list-disc list-inside">
+                    <li>Apps internas y portales</li>
+                    <li>Soluciones SaaS a medida</li>
+                    <li>MVPs para validación rápida</li>
+                </ul>
+            </div>
+            
+            <!-- Tarjeta de Servicio: Soporte -->
+            <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <div class="flex items-center justify-center h-12 w-12 rounded-full bg-emerald-100 mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                </div>
+                <h2 class="text-xl font-bold text-slate-800 mb-2">Capacitación y Soporte</h2>
+                <ul class="space-y-2 text-slate-600 list-disc list-inside">
+                    <li>Formación incluida en proyectos</li>
+                    <li>Documentación técnica y manuales</li>
+                    <li>Soporte 24/7 con SLA</li>
+                </ul>
+            </div>
+        </main>
+    </div>
+
+    <!-- --- WIDGET DEL CHATBOT --- -->
+    <div class="fixed bottom-5 right-5 z-50">
+        
+        <!-- Ventana del Chat (inicialmente oculta) -->
+        <div id="chat-window" class="w-80 sm:w-96 h-[600px] bg-white rounded-2xl shadow-2xl flex flex-col">
+            <!-- Cabecera del Chat -->
+            <div class="bg-slate-800 text-white p-4 rounded-t-2xl flex justify-between items-center">
+                <div>
+                    <p class="font-bold text-lg">Asistente Enthropy</p>
+                    <p class="text-xs text-slate-300">Respondiendo ahora</p>
+                </div>
+                <button id="close-chat-btn" class="text-slate-400 hover:text-white">&times;</button>
+            </div>
+            <!-- Cuerpo del Chat (donde van los mensajes) -->
+            <div id="chat-body" class="flex-1 p-4 overflow-y-auto bg-slate-50">
+                <div class="flex justify-start mb-4">
+                    <div class="bg-slate-200 text-slate-800 p-3 rounded-lg max-w-xs rounded-bl-none">
+                        <p>¡Hola! 👋 ¿Cómo puedo ayudarte hoy con los servicios de Enthropy?</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Pie del Chat (input y botón de enviar) -->
+            <div class="p-4 bg-white border-t border-slate-200 rounded-b-2xl">
+                <div class="flex items-center">
+                    <input type="text" id="chat-input" placeholder="Escribe tu mensaje..." class="flex-1 px-4 py-2 border border-slate-300 rounded-full focus:outline-none focus:ring-2 focus:ring-sky-500">
+                    <button id="send-btn" class="ml-3 bg-sky-600 text-white p-3 rounded-full hover:bg-sky-700 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" /></svg>
+                    </button>
+                </div>
+            </div>
         </div>
 
-        <div class="service-section">
-            [cite_start]<h2>Chatbots y Agentes Conversacionales [cite: 11]</h2>
-            <ul>
-                [cite_start]<li>Chatbots web/móvil para atención a usuarios 24/7. [cite: 12, 17]</li>
-                [cite_start]<li>Integración con WhatsApp, Telegram, Slack y Microsoft Teams. [cite: 13]</li>
-                [cite_start]<li>Agentes de voz y automatización de call-centers. [cite: 14]</li>
-            </ul>
-        </div>
+        <!-- Burbuja del Chat (botón para abrir) -->
+        <button id="chat-bubble" class="mt-4 bg-sky-600 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-lg hover:bg-sky-700 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
+        </button>
+    </div>
 
-         <div class="service-section">
-            [cite_start]<h2>Agentes de IA y Large Language Models [cite: 16]</h2>
-            <ul>
-                [cite_start]<li>Calificación de leads y clasificación de clientes. [cite: 18]</li>
-                [cite_start]<li>Generación automática de informes y contratos. [cite: 19]</li>
-                [cite_start]<li>Análisis de texto y sentiment analysis. [cite: 20]</li>
-            </ul>
-        </div>
+    <script>
+        // --- LÓGICA DEL CHATBOT ---
 
-        <div class="service-section">
-            [cite_start]<h2>Gestión de CRM y ERP [cite: 21]</h2>
-            <ul>
-                [cite_start]<li>Implementación y personalización de CRMs. [cite: 22]</li>
-                [cite_start]<li>Integración entre ERP y CRM. [cite: 24]</li>
-                [cite_start]<li>Flujos de lead-nurturing y scoring automáticos. [cite: 25]</li>
-            </ul>
-        </div>
+        // 1. Referencias a los elementos del DOM
+        const chatBubble = document.getElementById('chat-bubble');
+        const chatWindow = document.getElementById('chat-window');
+        const closeChatBtn = document.getElementById('close-chat-btn');
+        const chatInput = document.getElementById('chat-input');
+        const sendBtn = document.getElementById('send-btn');
+        const chatBody = document.getElementById('chat-body');
 
-         <div class="service-section">
-            [cite_start]<h2>Desarrollo de Software y SaaS [cite: 43, 48]</h2>
-            <ul>
-                [cite_start]<li>Aplicaciones internas y portales de cliente personalizados. [cite: 44, 45]</li>
-                [cite_start]<li>Desarrollo de soluciones SaaS a medida. [cite: 49]</li>
-                [cite_start]<li>MVPs rápidos para validación de producto. [cite: 47]</li>
-            </ul>
-        </div>
+        // 2. URL del Webhook de N8N (¡IMPORTANTE!)
+        const N8N_WEBHOOK_URL = 'https://n8n.enthropy.ai/webhook/WEB-Message';
 
-        </div>
+        // 3. Funciones para abrir y cerrar el chat
+        const toggleChatWindow = () => {
+            const isHidden = chatWindow.style.display === 'none' || chatWindow.style.display === '';
+            if (isHidden) {
+                chatWindow.style.display = 'flex';
+                setTimeout(() => chatWindow.classList.add('active'), 10); // Permite que el display se aplique antes de la animación
+            } else {
+                chatWindow.classList.remove('active');
+                setTimeout(() => chatWindow.style.display = 'none', 300); // Espera a que la animación termine
+            }
+        };
+
+        // 4. Función para añadir mensajes a la UI
+        const addMessageToUI = (message, sender) => {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `flex mb-4 ${sender === 'user' ? 'justify-end' : 'justify-start'}`;
+            
+            const messageBubble = document.createElement('div');
+            messageBubble.className = `p-3 rounded-lg max-w-xs ${sender === 'user' ? 'bg-sky-600 text-white rounded-br-none' : 'bg-slate-200 text-slate-800 rounded-bl-none'}`;
+            messageBubble.innerHTML = `<p>${message}</p>`;
+            
+            messageDiv.appendChild(messageBubble);
+            chatBody.appendChild(messageDiv);
+            
+            // Scroll automático al final
+            chatBody.scrollTop = chatBody.scrollHeight;
+        };
+        
+        // 5. Función para mostrar el indicador de "escribiendo"
+        const showTypingIndicator = () => {
+            const typingDiv = document.createElement('div');
+            typingDiv.id = 'typing-indicator';
+            typingDiv.className = 'flex justify-start mb-4';
+            typingDiv.innerHTML = `
+                <div class="bg-slate-200 text-slate-500 p-3 rounded-lg max-w-xs rounded-bl-none">
+                    <div class="flex items-center space-x-1">
+                        <span class="w-2 h-2 bg-slate-400 rounded-full animate-pulse" style="animation-delay: 0s;"></span>
+                        <span class="w-2 h-2 bg-slate-400 rounded-full animate-pulse" style="animation-delay: 0.2s;"></span>
+                        <span class="w-2 h-2 bg-slate-400 rounded-full animate-pulse" style="animation-delay: 0.4s;"></span>
+                    </div>
+                </div>
+            `;
+            chatBody.appendChild(typingDiv);
+            chatBody.scrollTop = chatBody.scrollHeight;
+        };
+
+        const removeTypingIndicator = () => {
+            const indicator = document.getElementById('typing-indicator');
+            if (indicator) {
+                indicator.remove();
+            }
+        };
+
+        // 6. Función principal para enviar el mensaje
+        const sendMessage = async () => {
+            const message = chatInput.value.trim();
+            if (!message) return;
+
+            addMessageToUI(message, 'user');
+            chatInput.value = '';
+            showTypingIndicator();
+
+            try {
+                const response = await fetch(N8N_WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: message }) // Asegúrate que N8N espera un objeto con la clave "message"
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Error de red: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                // N8N puede devolver la respuesta en diferentes formatos.
+                // Ajusta 'data.reply' o 'data.text' según cómo hayas configurado tu workflow de N8N.
+                const reply = data.reply || data.text || "Lo siento, no pude procesar tu solicitud en este momento.";
+                
+                removeTypingIndicator();
+                addMessageToUI(reply, 'bot');
+
+            } catch (error) {
+                console.error('Error al contactar el webhook:', error);
+                removeTypingIndicator();
+                addMessageToUI('Hubo un problema de conexión. Por favor, inténtalo de nuevo más tarde.', 'bot');
+            }
+        };
+
+        // 7. Asignación de eventos
+        chatBubble.addEventListener('click', toggleChatWindow);
+        closeChatBtn.addEventListener('click', toggleChatWindow);
+        sendBtn.addEventListener('click', sendMessage);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+    </script>
+
 </body>
 </html>
